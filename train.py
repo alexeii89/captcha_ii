@@ -117,8 +117,8 @@ def train_model(dataset_dir='dataset', epochs=50, batch_size=32, lr=0.001):
     """Основная функция обучения"""
     
     # Определяем символы (должны совпадать с main.py)
-    russian_letters = 'АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ'
-    numbers = '0123456789'
+    russian_letters = 'АБВГДЕЖИКЛМНПРСТУФХЦЧШЫЭЮЯ'
+    numbers = '12456789'
     characters = russian_letters + numbers
     
     print("=" * 60)
