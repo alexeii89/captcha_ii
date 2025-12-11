@@ -117,8 +117,9 @@ def train_model(dataset_dir='dataset', epochs=50, batch_size=32, lr=0.001):
     """Основная функция обучения"""
     
     # Определяем символы (должны совпадать с main.py)
+    # Исключаем Ь, Ъ, Й, О, Щ - их нет в капче
     russian_letters = 'АБВГДЕЖИКЛМНПРСТУФХЦЧШЫЭЮЯ'
-    numbers = '12456789'
+    numbers = '1234567890'
     characters = russian_letters + numbers
     
     print("=" * 60)
@@ -151,7 +152,8 @@ def train_model(dataset_dir='dataset', epochs=50, batch_size=32, lr=0.001):
     # Создаем модель
     # num_classes включает blank символ (индекс 0)
     model = CRNN(num_classes=len(characters) + 1).to(device)
-    print(f"\nМодель создана. Параметров: {sum(p.numel() for p in model.parameters()):,}")
+    print(
+        f"\nМодель создана. Параметров: {sum(p.numel() for p in model.parameters()):,}")
     
     # Функция потерь (CTC Loss)
     # blank=0 соответствует blank символу
@@ -191,7 +193,8 @@ def train_model(dataset_dir='dataset', epochs=50, batch_size=32, lr=0.001):
         train_accs.append(train_acc)
         
         # Валидация
-        val_loss, val_acc = validate(model, val_loader, criterion, device, dataset)
+        val_loss, val_acc = validate(
+            model, val_loader, criterion, device, dataset)
         val_losses.append(val_loss)
         val_accs.append(val_acc)
         
@@ -287,4 +290,3 @@ if __name__ == "__main__":
         batch_size=32,
         lr=0.001
     )
-
